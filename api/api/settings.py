@@ -74,27 +74,27 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'PORT': os.getenv('POSTGRES_PORT'),
-#         'HOST': os.getenv('DB_CONTAINER_HOST_NAME'),
-#         'USER': os.getenv('POSTGRES_USER'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-#         'NAME': os.getenv('POSTGRES_DB'),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'PORT': os.getenv('REMOTE_DB_PORT'),
-        'HOST': os.getenv('REMOTE_DB_HOST'),
-        'USER': os.getenv('REMOTE_DB_USER'),
-        'PASSWORD': os.getenv('REMOTE_DB_PASS'),
-        'NAME': os.getenv('REMOTE_DB_NAME'),
+        'PORT': os.getenv('POSTGRES_PORT'),
+        'HOST': os.getenv('DB_CONTAINER_HOST_NAME'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'NAME': os.getenv('POSTGRES_DB'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'PORT': os.getenv('REMOTE_DB_PORT'),
+#         'HOST': os.getenv('REMOTE_DB_HOST'),
+#         'USER': os.getenv('REMOTE_DB_USER'),
+#         'PASSWORD': os.getenv('REMOTE_DB_PASS'),
+#         'NAME': os.getenv('REMOTE_DB_NAME'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

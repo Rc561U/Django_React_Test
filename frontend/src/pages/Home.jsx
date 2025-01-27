@@ -1,16 +1,30 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Task from "../components/Task.jsx"
-import "../styles/Home.css"
+import "../styles/Home.css";
+import TaskCard from "../components/TaskCard.jsx";
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid2';
+import Header from "../components/Header";
+import { ThemeProvider, createTheme } from "@mui/material";
+import TaskCreateDialog from "../components/dialogs/TaskCreateDialog.jsx";
 
 function Home() {
     const [tasks, setTasks] = useState([]);
-    const [content, setContent] = useState("");
-    const [title, setTitle] = useState("");
 
     useEffect(() => {
         getTasks();
     }, []);
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#1976d2',
+            },
+            secondary: {
+                main: '#dc004e',
+            },
+        },
+    });
 
     const getTasks = () => {
         api
@@ -18,7 +32,6 @@ function Home() {
             .then((res) => res.data)
             .then((data) => {
                 setTasks(data);
-                console.log(data);
             })
             .catch((err) => alert(err));
     };
@@ -34,51 +47,22 @@ function Home() {
             .catch((error) => alert(error));
     };
 
-    const createTask = (e) => {
-        e.preventDefault();
-        api
-            .post("/api/tasks/", { content, title })
-            .then((res) => {
-                if (res.status === 201) alert("Task created!");
-                else alert("Failed to make task.");
-                getTasks();
-            })
-            .catch((err) => alert(err));
-    };
-
     return (
-        <div>
+        <ThemeProvider theme={theme}>
+            <Header />
             <div>
-                <h2>Tasks</h2>
-                {tasks.map((task) => (
-                    <Task task={task} onDelete={deleteTask} key={task.id} />
-                ))}
+                <Box sx={{ my: 2 }}>
+                    <TaskCreateDialog getTasks={getTasks} />
+                </Box>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    {tasks.map((task, index) => (
+                        <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
+                            <TaskCard task={task} onDelete={deleteTask} number={index} setTasks={setTasks} />
+                        </Grid>
+                    ))}
+                </Grid>
             </div>
-            <h2>Create a Task</h2>
-            <form onSubmit={createTask}>
-                <label htmlFor="title">Title:</label>
-                <br />
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                    value={title}
-                />
-                <label htmlFor="content">Content:</label>
-                <br />
-                <textarea
-                    id="content"
-                    name="content"
-                    required
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                ></textarea>
-                <br />
-                <input type="submit" value="Submit"></input>
-            </form>
-        </div>
+        </ThemeProvider>
     );
 }
 
