@@ -27,6 +27,7 @@ function Home() {
     });
 
     const getTasks = () => {
+        setTasks([]);
         api
             .get("/api/tasks/")
             .then((res) => res.data)
