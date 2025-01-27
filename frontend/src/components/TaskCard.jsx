@@ -40,7 +40,6 @@ export default function BasicCard({ task, onDelete, number, setTasks }) {
             .then((res) => res.data)
             .then((data) => {
                 setTasks(data);
-                console.log(data);
             })
             .catch((err) => handleClick(err.message));  // Handle error
     };
