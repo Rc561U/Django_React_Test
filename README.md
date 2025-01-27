@@ -1,7 +1,7 @@
 # SPA Task application (Django, React)
 
 
-### This application create for SpurIT
+### Tasking application with basic authentication via JWT. Created for SpurIT
 > ### Technologies used:
 >
 > - Docker & Docker-Compose
@@ -31,3 +31,5 @@ cd frontend/ && npm install && npm run serve
 
 ## Result
 [<img style="witdh:100px" src="https://res.cloudinary.com/djd9bqakh/image/upload/v1737940003/Screenshot_2025-01-27_040606_jd0jxb.png">](https://res.cloudinary.com/djd9bqakh/image/upload/v1737940003/Screenshot_2025-01-27_040606_jd0jxb.png)
+
+##### Tested on ubuntu 22.04 (node v23.3.0)
